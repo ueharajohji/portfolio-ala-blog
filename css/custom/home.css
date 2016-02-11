@@ -1,0 +1,23 @@
+.slide1, .slide2, .slide3 {
+	min-height: 560px; /* Must have a height or min-height set due to use of background images */
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.slide1 {
+background-image: url(http://i1038.photobucket.com/albums/a465/ueharajohji/d6f1efd3-84d6-4c8d-81d8-db6176b35d4d_zpst6ihwvqh.png);
+}
+.slide2 {
+background-image: url(http://goodlifeeducation.com/wp-content/uploads/2015/08/Skill-Development-Training-Icon.jpg);
+}
+
+.slide3 {
+background-image: url(http://static.misjr.mx/iconosmisjr/job-icon.png);
+}
+.carousel-control {
+  top:50%;
+  width:auto;
+  height:1em;
+  background:transparent;
+}
