@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bootstrap 3</title>
+    <title>私のページへよくぞ</title>
     <meta name="viewport" content ="width=device-width, initial-scale=1.0">
     <link href ="css/bootstrap.min.css" rel ="stylesheet">
     <link href ="css/styles.css" rel ="stylesheet">
@@ -18,7 +18,7 @@
 
 <body>
 
-        <div id="header"></div>
+        <div ><% include public/header %></div>
 
         <div id="carouselMain" class="carousel slide carousel-fade">
             <!-- Indicators -->
@@ -29,9 +29,12 @@
                     <div class="container">
                         <div class="carousel-caption">
 
-                            <h1 data-animation="animated bounceInLeft">私のページへよくぞ</h1>
-
+                            <h1 data-animation="animated infinite pulse"><%=testVar.translate("Welcome")%></h1>
+                            <p><a id="slide1Alert1B" class="btn btn-large btn-primary" onclick="showAlert(this.id)" >Skills</a></p>
+                            <div data-animation="animated infinite pulse" id="slide1Alert1" class="alert alert-success">
+                                <strong>Success!</strong> Indicates a successful or positive action.
                             </div>
+                        </div>
                     </div>
                 </div>
                 <div class="item">

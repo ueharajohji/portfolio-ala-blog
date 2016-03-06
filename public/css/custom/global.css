@@ -1,0 +1,92 @@
+body {
+  padding-bottom: 40px;
+  color: #5a5a5a;
+  height: 100%;
+}
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+.navbar-wrapper {
+
+    margin-top: 20px;
+    margin-bottom: -90px;
+}
+
+
+.navbar-wrapper .navbar {
+    border-radius: 4px;
+}
+
+@media(min-width:10em){
+
+h1 {
+font-size:16px;
+color: black;
+}
+}
+
+@media(min-width:34em){
+
+h1 {
+font-size:16px;
+color: black;
+}
+}
+@media(min-width:48em){
+
+h1 {
+font-size:16px;
+color: black;
+}
+}
+@media(min-width:62em){
+
+h1 {
+font-size:32px;
+color: black;
+}
+}
+@media(min-width:75em){
+.carousel-control {
+  top:25%;
+  width:10px;
+  height:1em;
+  background:transparent;
+}
+
+.carousel-caption{
+
+font-color: black;
+font-size:45px;
+top: 20%;
+bottom:auto;
+
+}
+
+h1 {
+font-size:45px;
+color: black;
+}
+
+.carouselMain {
+  margin-bottom: 60px;
+  height: 100%;
+}
+
+.carouselMain .item {
+  height: 500px;
+  background-color:#bbb;
+}
+.carouselMain img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 100%;
+}
+
+}
