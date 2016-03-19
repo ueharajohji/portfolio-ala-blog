@@ -59,12 +59,14 @@ color: black;
 }
 
 .carousel-caption{
-
-font-color: black;
-font-size:45px;
+  max-height: 20%;
+font-size:12px;
 top: 20%;
+font-weight: bold;
 bottom:auto;
-
+  position: absolute;
+ background: rgba(0,0,0,0.3);
+ border-radius: 0px 100px 100px 100px;
 }
 
 h1 {

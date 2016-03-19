@@ -3,14 +3,50 @@
     <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class ="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">english<b class="caret"></b></a>
+                    <a href="#"  data-animation="animated infinite pulse" class="dropdown-toggle" data-toggle="dropdown"><%=testVar.translate("English")%><b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0);" onclick="changeLang(this.text)"><img src="images/jp.png">日本語</a></li>
+                        <li><a href="javascript:void(0);" onclick="changeLang(
+                        this.text)"><img src="images/jp.png">日本語</a></li>
                         <li><a href="javascript:void(0);" onclick="changeLang(this.text)"><img src="images/en.png">en</a></li>
-                        
                     </ul>
                 </li>
             </ul>
      </div>
 
+</div>
+
+<div class="modal fade" id="contact" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p> Contact me </p>
+            </div>
+            <div class="modal-body">
+                <p> Thank you for visiting my page , If you want a message please use this form</p>
+                <div class="form-group">
+                <div id="messageSent" class="alert alert-success" >
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Message sent.</strong> .
+                </div>
+                <label for="usr">Name:</label>
+                <input type="text" class="form-control" id="namefield">
+                </div>
+                <div class="form-group">
+                <label for="pwd">Email</label>
+                <input type="text" class="form-control" id="emailfield">
+                </div>
+                <textarea class="form-control" style="min-width: 100%" id="textfield"></textarea>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-warning"  href="javascript:void(0);" onclick="sendMail()">
+                Send
+                </a>
+            
+                <a class="btn btn-default" data-dismiss="modal">
+                Close
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
