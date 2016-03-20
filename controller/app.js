@@ -1,8 +1,5 @@
 
 var currLocale = "日本語";
-
-var apikey= "key-3b3ace18c50cace29887779f88ef4d35";
-var domain = "johjiiiiu.com";
 var posts;
 var testVar = "testing";
 var express = require('express');
@@ -13,6 +10,7 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var fieldLocale = require('./locale.js');
 var wallPosts = require('./wall.js');
+var smtp = require('./smtp.js');
 
 var path = require('path');
 var app = express();
@@ -21,21 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set('views',path.join(path.resolve('../'), 'views'));
 app.set('view engine', 'ejs');
-//basic smtp
-var mailgun = require('mailgun-js')({apiKey: apikey, domain: domain});
-var userMail = {
-  from: 'Uehara Johji <ueharajohji@johjiiiiu.com>',
-  to: 'ueharajohji@gmail.com ,ueharajohji@johjiiiiu.com',
-  subject: 'A message from your visitor ;)',
-  text: ''
-};
 
-var thanksNotif = {
-  from: 'Uehara Johji <ueharajohji@johjiiiiu.com>',
-  to: '',
-  subject: '[No-REPLY] ---Johji----',
-  text: 'Thanks for your message , I will get reply as soon as I read your e-mail. This message is generated automatically. '
-};
 
 
 app.post('/changeLang', function(req, res) {
@@ -47,28 +31,12 @@ app.post('/changeLang', function(req, res) {
 
 app.post('/sendMail', function(req, res) {
   //j.u mailgunの為のコード
-
-  //send to me
-  mailerSubject=req.body.mailerSubject;
-  mailerFrom=req.body.mailerFrom;
-  mailerText=req.body.mailerText;
-  mailerName = req.body.mailerName;
-  console.log(mailerSubject);
-
-  userMail.subject = mailerSubject;
-  userMail.text = mailerText; 
-  mailgun.messages().send(userMail, function (error, body) {
-  console.log(body);
-  });
-  //send thanks
-  thanksNotif.to =mailerFrom;
-  mailgun.messages().send(thanksNotif, function (error, body) {
-  console.log(body);
-  });
-
-  //end
+  smtp.userMail.text = req.body.mailerText;
+  smtp.userMail.subject = req.body.mailerSubject;
+  smtp.thanksNotif.to = req.body.mailerFrom;
+  smtp.sendMail(smtp.userMail,smtp.thanksNotif);
   res.writeHead(200, {'content-type': 'text/json' });
-  res.write( JSON.stringify({ thanks : "Thanks " + mailerFrom}) );
+  res.write( JSON.stringify({ thanks : "Thanks " + req.body.mailerFrom}) );
   res.end('\n');
 
 });

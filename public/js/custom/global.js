@@ -38,7 +38,9 @@ function sendMail(){
 
 mailer.name = document.getElementById("namefield").value;
 mailer.from = document.getElementById("emailfield").value;
-mailer.subject ="message from" + document.getElementById("emailfield").value;
+mailer.subject ="message from " 
+				+ document.getElementById("namefield").value 
+				+ "("+document.getElementById("emailfield").value+")";
 mailer.text = document.getElementById("textfield").value;
 
 	$.ajax({
@@ -54,9 +56,7 @@ mailer.text = document.getElementById("textfield").value;
           
               clearFields();
               $('#messageSent').show();
-			  $("#messageSent").fadeTo(5000, 500).slideUp(500, function(){
-    		  $("#messageSent").alert('close');
-			  });
+			  $("#messageSent").fadeTo(5000, 500).slideUp(500);
               
         }
     });
