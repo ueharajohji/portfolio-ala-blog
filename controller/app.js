@@ -1,4 +1,4 @@
-
+var userCredential = 0; //0=user 1=johji
 var currLocale = "日本語";
 var posts;
 var testVar = "testing";
@@ -11,6 +11,7 @@ var multer = require('multer');
 var fieldLocale = require('./locale.js');
 var wallPosts = require('./wall.js');
 var smtp = require('./smtp.js');
+var Sequelize = require('./../model/db_Model.js');
 
 var path = require('path');
 var app = express();
@@ -41,36 +42,76 @@ app.post('/sendMail', function(req, res) {
 
 });
 
+app.post('/checkLogin', function(req, res) {
+  //j.u ログインチェック
+  var username = "uehara";//アクセスできるのは管理者のみです。
+  var password = req.body.password;
+  console.log("checkpoint2 :"+password);
+  //go get if correct
+  Sequelize.checkPassword(username,password,function(err,results){
+    if(err)
+      throw err;
+    else{
+      
+      //console.log(""+results.username+" and " +results.password+" exist");
+      if(results)
+      {
+      
+      userCredential=1;
+      //res.redirect('/');
+      res.writeHead(200, {'content-type': 'text/json' });
+      res.write( JSON.stringify({ message : "login success"}) );
+      
+      }
+      else
+      {
+      
+      res.writeHead(200, {'content-type': 'text/json' });
+      res.write( JSON.stringify({ message : "login failed"}) );
+      
+      }
+      res.end('\n');
+    }
+
+  });
+
+  
+});
+
+app.post('/logout',function(req,res){
+
+  userCredential = 0;
+  res.end('\n');
+});
+
 app.get('/', function(req,res){
 
+Sequelize.sequelize.sync();
+//add delete ok
+//Sequelize.addPost("this is");
+//Sequelize.deletePost(3);
+//Sequelize.getAllPost();
 fieldLocale.setLocale(currLocale);
 
-changeResponse().then(function(posts){
-    console.log(posts);
-    res.render('pages/home', {
-        
-        testVar: fieldLocale,
-        wallPosts: posts
-    });
-
-})
-
-function changeResponse ()
-{
- var deferred = q.defer();
- wallPosts.getWall(function(err, results) {
+//j.u WallをDBから取得
+ Sequelize.getAllPost(function(err, results) {
     if (err)
       throw err; 
     else
       {
+
         posts = results;
-        deferred.resolve(posts);
+         res.render('pages/home', {
+        
+        testVar: fieldLocale,
+        wallPosts: posts,
+        userCredential:userCredential
+      });
       }
     
   });
- return deferred.promise;
-}
-  
+
+
 });
 
 

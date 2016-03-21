@@ -14,7 +14,9 @@ $(document).ready(function(){
 
 
 $('#messageSent').hide();
-
+shortcut.add("Ctrl+Shift+Alt+J",function() {
+	$('#admin').modal('toggle');
+});
 
 });
 
@@ -63,6 +65,37 @@ mailer.text = document.getElementById("textfield").value;
 
 }
 
+function login(){
+
+var password = document.getElementById("password").value;
+//check password if correct
+alert("checkpoint1 :"+password);
+	$.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/checkLogin',
+        data: {
+        	password:password
+        },
+        success: function (dataCheck) {
+          
+        
+        alert(dataCheck.message); 
+        location.reload();     
+        }
+    });
+
+}
+
+function logout() {
+	$.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/logout',
+        
+        success: function (dataCheck) { 
+        location.reload();     
+        }
+    });
+}
 
 function clearFields(){
 
