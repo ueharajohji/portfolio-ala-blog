@@ -23,9 +23,23 @@ doAnimations($firstAnimatingElems);
 
 });
 
+$('#addPost').click(function(){
+
+openCreateNew();
+
+});
+
+$('#savePost').click(function(){
+
+openCreateNew();
+
+});
+
+
 $("#slide1Alert1").hide();
 //$("#slide1Alert1").show();
 });
+
 
 
 function showAlert(elems){
@@ -54,5 +68,30 @@ var $this =$(this),
     });
 
 });
+
+}
+
+function deletePost(elem)
+{
+
+	var postId = elem.id;
+	$.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/deletePost',
+        data: {
+        	postid:postId
+        },
+        success: function (dataCheck) {
+          
+        
+        alert(dataCheck.message); 
+        location.reload();     
+        }
+    });
+
+}
+function editPost(elem)
+{
+
 
 }

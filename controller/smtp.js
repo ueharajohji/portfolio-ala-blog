@@ -12,8 +12,8 @@ var userMail = {
 var thanksNotif = {
   from: 'Uehara Johji <ueharajohji@johjiiiiu.com>',
   to: '',
-  subject: 'message from the Site Admin (Uehara Johji)',
-  text: 'Thanks for your message , I will reply as soon as I read your e-mail. This message is generated automatically. '
+  subject: 'アドミニストレータからメッセージが届きました (上原 Johji)',
+  text: 'メッセージありがとうございます！ , このメッセージを読み次第、お返事させていただきます。 このメッセージが自動で作成されました. ーウエハラ'
 };
 
 var sendMail = function(mail,thanks){

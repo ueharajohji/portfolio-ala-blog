@@ -3,7 +3,7 @@ var Sequelize = require('sequelize');
 var sequelize = new Sequelize('webresume','root','uehara98',
 {
 	host: 'localhost', 
-	port: '3307',
+	port: '3306',
 	dialect: 'mysql',
 	pool: {
 		max: 5,
@@ -67,6 +67,12 @@ var getAllPost = function (callback){
 
 };
 
+var getPost = function (id,callback){
+console.log("entered getPost function");
+post_t.findById(id).nodeify(callback);
+
+};
+
 var checkPassword = function (username,password,callback){
 
 	user.find({
@@ -85,6 +91,7 @@ var checkPassword = function (username,password,callback){
 
 exports.sequelize = sequelize;
 exports.addPost = addPost;
+exports.getPost = getPost;
 exports.deletePost = deletePost;
 exports.getAllPost = getAllPost;
 exports.checkPassword = checkPassword;

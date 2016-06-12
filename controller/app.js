@@ -9,13 +9,14 @@ var q = require('q');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var fieldLocale = require('./locale.js');
-var wallPosts = require('./wall.js');
 var smtp = require('./smtp.js');
 var Sequelize = require('./../model/db_Model.js');
 
 var path = require('path');
 var app = express();
-app.use(express.static(path.resolve('../public')));
+
+//app.use(express.static(path.resolve('../public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set('views',path.join(path.resolve('../'), 'views'));
@@ -84,9 +85,63 @@ app.post('/logout',function(req,res){
   res.end('\n');
 });
 
+app.get('/article/:id', function(req , res){
+  fieldLocale.setLocale(currLocale);
+Sequelize.addPost("this is post" +req.params.id);
+//j.u WallをDBから取得
+ Sequelize.getAllPost(function(err, results) {
+    if (err)
+      throw err; 
+    else
+      {
+
+        posts = results;
+         res.render('pages/home', {
+        
+        testVar: fieldLocale,
+        wallPosts: posts,
+        userCredential:userCredential
+      });
+      }
+    
+  });
+});
+
+app.get('/article/as', function(req,res){
+
+//Sequelize.sequelize.sync();
+//Sequelize.sequelize.sync({force:true});
+//add delete ok
+//Sequelize.addPost("this is");
+//Sequelize.deletePost(3);
+//Sequelize.getAllPost();
+fieldLocale.setLocale(currLocale);
+
+//j.u WallをDBから取得
+ Sequelize.getAllPost(function(err, results) {
+    if (err)
+      throw err; 
+    else
+      {
+
+        posts = results;
+         res.render('pages/home', {
+        
+        testVar: fieldLocale,
+        wallPosts: posts,
+        userCredential:userCredential
+      });
+      }
+    
+  });
+
+
+});
+
 app.get('/', function(req,res){
 
-Sequelize.sequelize.sync();
+//Sequelize.sequelize.sync();
+//Sequelize.sequelize.sync({force:true});
 //add delete ok
 //Sequelize.addPost("this is");
 //Sequelize.deletePost(3);

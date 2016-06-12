@@ -16,6 +16,7 @@ $(document).ready(function(){
 $('#messageSent').hide();
 shortcut.add("Ctrl+Shift+Alt+J",function() {
 	$('#admin').modal('toggle');
+    $("#password").focus();
 });
 
 });
@@ -27,7 +28,6 @@ $.ajax({
         url: 'http://localhost:3000/getWall',
         success: function (data) {
           
-              alert("got wall" + data);
         }
     });
 
@@ -68,8 +68,8 @@ mailer.text = document.getElementById("textfield").value;
 function login(){
 
 var password = document.getElementById("password").value;
+alert(password);
 //check password if correct
-alert("checkpoint1 :"+password);
 	$.ajax({
         type: 'POST',
         url: 'http://localhost:3000/checkLogin',
@@ -79,7 +79,7 @@ alert("checkpoint1 :"+password);
         success: function (dataCheck) {
           
         
-        alert(dataCheck.message); 
+       
         location.reload();     
         }
     });
